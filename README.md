@@ -44,13 +44,13 @@ docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet pytho
 
 
 For crop grown in between February and August
-
 <pre>
 cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Feb_Aug
 </pre>
+
 
 For crop grown in between May and August
 <pre>
@@ -60,6 +60,7 @@ docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season May_Aug
 </pre>
 
+
 For crop grown in between June and October
 <pre>
 cd crop_prediction_tool
@@ -67,6 +68,7 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Jun_Oct
 </pre>
+
 
 For crop grown in between January and August
 <pre>
