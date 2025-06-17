@@ -23,20 +23,55 @@ docker save -o /docker_file/address_in/crop_prediction_tool/docker_fin_3dunet.ta
 
 ## Running the tool in the docekr
 
-### Extracting labels from Eurocrops
-
 
 Load the Docker Image
 
 <pre>
-cd stelar_3dunet
+cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
-<pre>
+</pre>
 
 
 Extract Labels from EuroCrops
 
 <pre>
-docker run -it -v /home/luser/stelar_3dunet:/app/ docker_fin_3dunet python label_extraction_docker.py
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python label_extraction_docker.py
+</pre>
+
+
+## Running crop predictor 
+
+
+For crop grown in between February and August
+
 <pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Feb_Aug
+</pre>
+
+For crop grown in between May and August
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season May_Aug
+</pre>
+
+For crop grown in between June and October
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Jun_Oct
+</pre>
+
+For crop grown in between January and August
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Jan_Aug
+</pre>
