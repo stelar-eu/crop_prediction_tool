@@ -77,3 +77,91 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Jan_Aug
 </pre>
+
+
+
+## Comprehensive evaluation of Ensemble performance to get crop-wise IOU, Accuracy, F1 score and confusion matrix 
+
+### For months February to August
+
+<pre>
+
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 33 --season Feb_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 36 --season Feb_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 41 --season Feb_Aug
+
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 34 --season Feb_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 37 --season Feb_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 40 --season Feb_Aug
+
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 34 --crop_2 37 --crop_3 40
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 33 --crop_2 36 --crop_3 41
+
+</pre>
+
+
+### For months May to August
+
+
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 2 --season May_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 15 --season May_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 20 --season May_Aug
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 21 --season May_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 23 --season May_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 28 --season May_Aug
+
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 2 --crop_2 15 --crop_3 20
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 21 --crop_2 23 --crop_3 28
+
+</pre>
+
+### For months June to October
+
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 8 --season Jun_Oct
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 30 --season Jun_Oct
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 9 --season Jun_Oct
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 18 --season Jun_Oct
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 19 --season Jun_Oct
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 7 --season Jun_Oct
+
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 8 --crop_2 9 --crop_3 30
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 7 --crop_2 18 --crop_3 19
+
+</pre>
+
+
+### For months January to August
+
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 4 --season Jan_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 7 --season Jan_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 9 --season Jan_Aug
+
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 4 --crop_2 7 --crop_3 9
+
+</pre>
