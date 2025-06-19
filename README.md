@@ -21,26 +21,39 @@ docker save -o /docker_file/address_in/crop_prediction_tool/docker_fin_3dunet.ta
 </pre>
 
 
+
+## Data processing 
+
+Put the LAi zip file in `/dataset/france2/lai_ras/` . and unzip it. 
+
+
+
 ## Running the tool in the docekr
 
 
-Load the Docker Image
+Load the Docker image and run the crop prediction application
 
 <pre>
 cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet
 </pre>
 
-
-Extract Labels from EuroCrops
+Then to extract LAI from >RAS files, run 
 
 <pre>
-docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python label_extraction_docker.py
+python lai_extraction_from_ras.py
+</pre>
+
+Extract Labels from EuroCrops 
+
+<pre>
+python label_extraction_docker.py
 </pre>
 
 
-## Running crop predictor 
+## Running crop predictor to save the output of the whole tile
 
 
 For crop grown in between February and August
@@ -81,6 +94,8 @@ docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet pytho
 
 
 ## Comprehensive evaluation of Ensemble performance to get crop-wise IOU, Accuracy, F1 score and confusion matrix 
+
+## Test set preparation to evaluate the ensemble
 
 ### For months February to August
 
@@ -163,5 +178,25 @@ python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 7 --season Jan_A
 python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 9 --season Jan_Aug
 
 python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 4 --crop_2 7 --crop_3 9
+
+</pre>
+
+
+
+### TO evaluate the model and plot and get quantitative results  
+
+<pre>
+cd crop_prediction_tool
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+docker load -i docker_fin_3dunet.tar
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet
+
+python vista_patch_exp0/evaluator.py --season Feb_Aug --num_subgroup_samples 300
+python vista_patch_exp0/evaluator.py --season May_Aug --num_subgroup_samples 300
+python vista_patch_exp0/evaluator.py --season Jun_Oct --num_subgroup_samples 300
+python vista_patch_exp0/evaluator.py --season Jan_Aug --num_subgroup_samples 300
+
+python vista_patch_exp0/metrics_and_visuals.py
+
 
 </pre>
