@@ -104,6 +104,7 @@ cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
+
 python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 8 --season Jun_Oct
 python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 30 --season Jun_Oct
 python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 9 --season Jun_Oct
@@ -127,9 +128,11 @@ GRASSLAND(9)
 cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
-docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 4 --season Jan_Aug
-docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 7 --season Jan_Aug
-docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 9 --season Jan_Aug
+docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
+
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 4 --season Jan_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 7 --season Jan_Aug
+python vista_patch_exp0/test_set_sampler.py --chosen_crop_types 9 --season Jan_Aug
 
 
 
@@ -161,7 +164,7 @@ if season=="May_Aug":
 if season=="Jun_Oct":
     time_strip_inds = [(len(filepaths) // 12) * 4, ((len(filepaths) // 12) * 4)-5] # for summer_autumn
 if season=="Jan_Aug":
-    time_strip_inds = [(len(filepaths) // 12) * 0, ((len(filepaths) // 12) * 10)] # for summer_autumn
+    time_strip_inds = [(len(filepaths) // 12) * 0, ((len(filepaths) // 12) * 0) + 1] # for summer_autumn
 
 
 logging.info(f"Selected crop type: {vista_crop_dict[chosen_crop_types]}")
