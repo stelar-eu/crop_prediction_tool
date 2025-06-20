@@ -40,20 +40,19 @@ docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet
 </pre>
 
-Then to extract LAI from RAS files, run 
 
 <pre>
 python lai_extraction_from_ras.py
 </pre>
 
-Extract Labels from EuroCrops 
+Extract Labels from EuroCrops. Download the crop labels for the required country from https://zenodo.org/records/8229128 and extract and move the files to `./dataset/shape_files_from_Eurocrops`. In `./lai_extraction_from_ras.py` enter the eastings and northings of the selected vista bounding box. Then to extract LAI from RAS files, run  
 
 <pre>
 python label_extraction_docker.py
 </pre>
 
 
-## Running crop predictor to save the output of the whole tile
+## Running crop predictor to save the output of the whole tile 
 
 
 For crop grown in between February and August
