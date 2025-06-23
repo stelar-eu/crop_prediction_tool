@@ -11,7 +11,13 @@ mkdir /your/address/docker-tmp
 
 ### Build the Docker Container
 
-Run the following commands to build and save the Docker container:
+CLone the repository :
+
+`git clone https://github.com/stelar-eu/crop_prediction_tool.git`
+
+Then `cd crop_prediction_tool`
+
+and run the following commands to build and save the Docker container:
 
 <pre>
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
@@ -41,13 +47,13 @@ docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet
 </pre>
 
 
-To process .RAS files from vista to .npy format 
+##  Preprocessing
+
+To process .RAS files from vista to .npy format(one .npy image is saved per time point)
 
 <pre>
 python lai_extraction_from_ras.py --image_length 10002 --image_width 10002
 </pre>
-
-
 
 
 Extract Labels from EuroCrops. Download the crop labels for the required country from https://zenodo.org/records/8229128 and extract and move the files to `./dataset/shape_files_from_Eurocrops`. In `./lai_extraction_from_ras.py` enter the eastings and northings of the selected vista bounding box. Then to extract LAI from RAS files, run  
