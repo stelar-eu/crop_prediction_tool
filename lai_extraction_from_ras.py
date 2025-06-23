@@ -6,8 +6,21 @@ import numpy as np
 datapath = './dataset/france2/lai_ras/'
 
 
-image_length = 10002
-image_width = 10002
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Enter crop type numbers in order')
+
+parser.add_argument('--image_length', type=float, default=10002, help='input season')
+parser.add_argument('--image_width', type=float, default=10002, help='input season')
+
+
+
+args = parser.parse_args()
+image_length = args.image_length
+image_width = args.image_width
+
+
 
 import glob
 filepaths = glob.glob('./dataset/france2/lai_ras/*.RAS')
