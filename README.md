@@ -41,15 +41,22 @@ docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet
 </pre>
 
 
+To process .RAS files from vista to .npy format 
+
 <pre>
-python lai_extraction_from_ras.py
+python lai_extraction_from_ras.py --image_length 10002 --image_width 10002
 </pre>
+
+
+
 
 Extract Labels from EuroCrops. Download the crop labels for the required country from https://zenodo.org/records/8229128 and extract and move the files to `./dataset/shape_files_from_Eurocrops`. In `./lai_extraction_from_ras.py` enter the eastings and northings of the selected vista bounding box. Then to extract LAI from RAS files, run  
 
 <pre>
-python label_extraction_docker.py
+python label_extraction_docker.py --eastings_min 704855.0000 --eastings_max 804875.0000 --northings_min 4895125.0000 --northings_max 4995145.0000
 </pre>
+
+These corners of the bounding box available from Vista. 
 
 
 ## Running crop predictor to save the output of the whole tile 
