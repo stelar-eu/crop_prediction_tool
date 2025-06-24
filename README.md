@@ -30,7 +30,8 @@ docker save -o /docker_file/address_in/crop_prediction_tool/docker_fin_3dunet.ta
 
 ## Data processing 
 
-Put the LAi zip file in `/dataset/france2/lai_ras/` . and unzip it. 
+Download LAI dataset\link{https://imisathena.sharepoint.com/sites/STELAR/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FSTELAR%2FShared%20Documents%2FWP5%2DPilot%20Testing%20and%20Evaluation%2FTask%205%2E3%20%2D%20Pilot%202%20%2D%20Early%20crop%20growth%20predictions%2Fdatasets%2Fstudy%20site%20france%2FLAI%2030TYQ&viewid=8f67e1b5%2D0da4%2D49f7%2Da0a5%2Dfbdb223d2562} 
+with name 30TYQ and put files correspoinding to 2022  in `/dataset/france2/lai_ras/`. 
 
 
 
@@ -67,6 +68,7 @@ These corners of the bounding box available from Vista.
 
 ## Running crop predictor to save the output of the whole tile 
 
+Put all the models inside `/checkpoints_f1` directory.
 
 For crop grown in between February and August
 <pre>
