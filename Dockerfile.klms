@@ -1,47 +1,48 @@
-FROM python:3.11-slim
+# -------------------------------------------------
+# Base image
+# -------------------------------------------------
+FROM python:3.11-slim AS base
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    jq \
-    wget \
-    bash \
-    bzip2 \
-    ca-certificates \
-    libglib2.0-0 \
-    libxext6 \
-    libsm6 \
-    libxrender1 \
- && rm -rf /var/lib/apt/lists/*
-
-# Install Miniconda
+ARG DEBIAN_FRONTEND=noninteractive
 ENV CONDA_DIR=/opt/conda
-ENV PATH=$CONDA_DIR/bin:$PATH
 ENV CONDA_ENV=stconf
+ENV PATH=${CONDA_DIR}/bin:$PATH
 
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    bash Miniconda3-latest-Linux-x86_64.sh -b -p $CONDA_DIR && \
-    rm Miniconda3-latest-Linux-x86_64.sh
+# -------------------------------------------------
+# 1. System-level packages
+# -------------------------------------------------
+COPY docker/apt-packages.txt /tmp/apt-packages.txt
+RUN apt-get update && \
+    xargs -a /tmp/apt-packages.txt apt-get install -y --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/* /tmp/apt-packages.txt
 
-# Create environment and install everything
-RUN bash -c "source $CONDA_DIR/etc/profile.d/conda.sh && \
-    conda create -y -n $CONDA_ENV python=3.11 && \
-    conda activate $CONDA_ENV && \
-    conda install -y -c conda-forge cudatoolkit=11.8 && \
-    pip install nvidia-cudnn-cu11==8.6.0.163 && \
-    conda install -y -c conda-forge tensorflow=2.13 && \
-    pip install classification-models-3D==1.0.10 && \
-    pip install efficientnet-3D==1.0.2 && \
-    pip install segmentation-models-3D==1.0.7 && \
-    conda install -y -c conda-forge scikit-learn==1.5.0 matplotlib && \
-    pip install patchify==0.2.3 && \
-    pip install minio && \
-    conda install -y -c conda-forge scikit-image=0.24.0 rasterio sqlite gdal pyproj fiona geopandas opencv && \
-    conda clean --all --yes"
+# -------------------------------------------------
+# 2. Miniconda
+# -------------------------------------------------
+RUN wget -qO /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash /tmp/miniconda.sh -b -p "${CONDA_DIR}" && \
+    rm /tmp/miniconda.sh
 
+# -------------------------------------------------
+# 3. Conda environment
+# -------------------------------------------------
+COPY docker/environment.yml /tmp/environment.yml
+RUN ${CONDA_DIR}/bin/conda env create -f /tmp/environment.yml && \
+    ${CONDA_DIR}/bin/conda clean --all --yes && \
+    ln -s ${CONDA_DIR}/envs/${CONDA_ENV} ${CONDA_DIR}/env && \
+    echo "conda activate ${CONDA_ENV}" >> /etc/bash.bashrc
+
+# Make sure subsequent RUN/CMD/ENTRYPOINT use the env
+SHELL ["bash", "-l", "-c"]
+
+# -------------------------------------------------
+# 4. Application code
+# -------------------------------------------------
 WORKDIR /app
-
-COPY . /app/
+COPY . /app
 RUN chmod +x run.sh
 
-ENTRYPOINT ["./run.sh"]
+# -------------------------------------------------
+# 5. Default entrypoint
+# -------------------------------------------------
+ENTRYPOINT ["bash", "-l", "-c", "exec ./run.sh"]

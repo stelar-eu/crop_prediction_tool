@@ -1,0 +1,10 @@
+curl
+jq
+wget
+bash
+bzip2
+ca-certificates
+libglib2.0-0
+libxext6
+libsm6
+libxrender1

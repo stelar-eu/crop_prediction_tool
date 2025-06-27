@@ -1,0 +1,25 @@
+name: stconf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - cudatoolkit=11.8       
+  - tensorflow=2.13
+  - scikit-learn=1.5.0
+  - matplotlib
+  - scikit-image=0.24.0
+  - rasterio
+  - sqlite
+  - gdal
+  - pyproj
+  - fiona
+  - geopandas
+  - opencv
+  - pip                      
+  - pip:
+      - nvidia-cudnn-cu11==8.6.0.163
+      - classification-models-3D==1.0.10
+      - efficientnet-3D==1.0.2
+      - segmentation-models-3D==1.0.7
+      - patchify==0.2.3
+      - minio

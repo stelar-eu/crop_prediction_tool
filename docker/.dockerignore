@@ -1,0 +1,9 @@
+# Never copy venvs, git metadata, large data, etc.:
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.ipynb
+*.data
+.git
