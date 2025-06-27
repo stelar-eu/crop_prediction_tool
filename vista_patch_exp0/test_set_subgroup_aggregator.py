@@ -39,8 +39,8 @@ cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
-python3 vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 2 --crop_2 15 --crop_3 20
-python3 vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 21 --crop_2 23 --crop_3 28
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 2 --crop_2 15 --crop_3 20
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 21 --crop_2 23 --crop_3 28
 
 
 Jun_Oct crops
@@ -49,8 +49,8 @@ cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
-python3 vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 8 --crop_2 9 --crop_3 30
-python3 vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 7 --crop_2 18 --crop_3 19
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 8 --crop_2 9 --crop_3 30
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 7 --crop_2 18 --crop_3 19
 
 
 Jan_Aug 
@@ -59,7 +59,7 @@ cd crop_prediction_tool
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 docker load -i docker_fin_3dunet.tar
 docker run -it -v /home/luser/crop_prediction_tool:/app/ docker_fin_3dunet 
-python3 vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 4 --crop_2 7 --crop_3 9
+python vista_patch_exp0/test_set_subgroup_aggregator.py --crop_1 4 --crop_2 7 --crop_3 9
 
 
 '''

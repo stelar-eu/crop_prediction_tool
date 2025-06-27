@@ -56,6 +56,35 @@ from matplotlib import pyplot
 import matplotlib.path as mpl_path
 import cv2
 
+# coordinates of bounds of the bounding box 
+
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Enter crop type numbers in order')
+
+parser.add_argument('--eastings_min', type=float, default=704855.0000, help='input season')
+parser.add_argument('--eastings_max', type=float, default=804875.0000, help='input season')
+
+
+parser.add_argument('--northings_min', type=float, default=4895125.0000, help='input season')
+parser.add_argument('--northings_max', type=float, default=4995145.0000, help='input season')
+
+
+args = parser.parse_args()
+eastings_min = args.eastings_min
+eastings_max = args.eastings_max
+
+northings_min = args.northings_min
+northings_max = args.northings_max
+
+
+'''Lai_eastings = np.array([704855.0000, 804875.0000])
+Lai_northings = np.array([4895125.0000, 4995145.0000])'''
+
+
+Lai_eastings = np.array([eastings_min, eastings_max])
+Lai_northings = np.array([northings_min, northings_max])
 
 
 os.environ['USE_PYGEOS'] = '0'
@@ -68,9 +97,9 @@ prefix = '/app/'
 
 # Load the shape files
 
-shpPath = prefix+'/dataset/shape_files_from_Eurocrops/dataset5_france/FR_2018/'
+shpPath = prefix+'/dataset/shape_files_from_Eurocrops/FR_2018/'
 shpName = 'FR_2018_EC21'
-csvPath = prefix+'/dataset/shape_files_from_Eurocrops/dataset5_france/'
+csvPath = prefix+'/dataset/shape_files_from_Eurocrops/'
 csvName = 'fr_2018.csv'
 
 
@@ -123,8 +152,7 @@ all_crops = [ALFALFA, BEET, CLOVER, FLAX, FLOWERING_LEGUMES, FLOWERS, FOREST, GR
 all_crops_flat = [item for sublist in all_crops for item in sublist]
 
 # this is from VISTA readme files of LAI
-Lai_eastings = np.array([704855.0000, 804875.0000])
-Lai_northings = np.array([4895125.0000, 4995145.0000])
+
 
 
 shpfile = geopandas.read_file(shpPath+shpName+'.shp')
