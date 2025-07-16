@@ -2,13 +2,38 @@ import json
 import sys
 import traceback
 from utils.mclient import MinioClient
-from utils.processing import prepare_data
+'''from utils.processing import prepare_data
 from utils.inference import run_inference
 from utils.io_utils import save_geotiff, save_png
-from utils.config import transform, crs_code, get_labels_in_color
+from utils.config import transform, crs_code, get_labels_in_color'''
 import os
 import numpy as np
+import string
+import random
 
+from vista_patch_exp0.spatial_recon import evaluate_season
+
+'''
+conda deactivate
+conda deactivate
+cd /home/luser/crop_prediction_tool
+conda activate /home/luser/miniforge3/envs/stcon4
+
+python main.py input.json output.json
+
+'''
+
+download_LAI = False
+download_mask = False
+
+
+
+def create_random_txt(filename: str) -> None:
+
+    pool = string.ascii_letters + string.digits + string.punctuation + string.whitespace
+    random_text = ''.join(random.choices(pool, k=1000))
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(random_text)
 
 def run(json):
     try:
@@ -19,68 +44,35 @@ def run(json):
         minio_endpoint = json['minio']['endpoint_url']
 
         mc = MinioClient(minio_endpoint, minio_id, minio_key, secure=True, session_token=minio_skey)
-        ############################################################
+        inputs = json['input']
+        outputs = json['output']
 
-        ####################### PARAMETER READ #####################
+        create_random_txt("./testpath/random.txt")
+        mc.put_object(s3_path= outputs['predictions'], file_path="./testpath/random.txt")
+
         params = json['parameters']
-        inputs = json['inputs']
-        outputs = json['outputs']
+        which_season = params['month']
 
-        season = params['season']
+        print("params", params)
+        print("which season here", which_season)
 
-        # Input paths (assuming standard keys for this pipeline)
-        lai_files = inputs['lai_files']          # path to LAI folder in MinIO
-        label_file = inputs['label_file'][0]         # path to aligned label file
-        model_folder = inputs['model_folder'][0]     # folder with pretrained models
 
-        # Output paths
-        predicted_tif_path = outputs['predicted_tif']
-        ground_truth_tif_path = outputs['ground_truth_tif']
-        pred_png_path = outputs['predicted_png']
-        gt_png_path = outputs['ground_truth_png']
+        # Download LAI
+        act_lai_files = inputs['actual_LAI']          # path to LAI folder in MinIO
+        outputs = json['output']
+        if download_LAI:
+            for ts in range (len(act_lai_files)):
+                mc.get_object(s3_path=act_lai_files[ts], local_path='./dataset/france2/processed_lai_npy2/'+act_lai_files[ts][40:-6]+str(ts).zfill(2)+'.npy')
 
-        ################### DATA PREPARATION #######################
-        data_tensor, label_tensor, file_list = prepare_data(mc, lai_files, label_file)
+        # Download Labels
+        if download_mask:
+            labels = inputs['spatial_labels']          # path to LAI folder in MinIO
+            mc.get_object(s3_path=labels[0], local_path='./storage/full_mast1/vista_labes_aligned.npy')
 
-        ####################### INFERENCE ##########################
-        prediction, ground_truth = run_inference(
-            data_tensor,
-            label_tensor,
-            season,
-            model_folder,
-            mc
-        )
+        evaluate_season()
 
-        ####################### OUTPUT SAVE ########################
-        save_geotiff(predicted_tif_path, prediction, transform, crs_code, mc)
-        save_geotiff(ground_truth_tif_path, ground_truth, transform, crs_code, mc)
-
-        # Save PNGs
-        prediction_color = get_labels_in_color(prediction)
-        ground_truth_color = get_labels_in_color(ground_truth)
-
-        save_png(pred_png_path, prediction_color, mc)
-        save_png(gt_png_path, ground_truth_color, mc)
-
-        ####################### METRICS #############################
-        crop_ids, crop_counts = np.unique(prediction, return_counts=True)
-        crop_distribution = {int(c): int(n) for c, n in zip(crop_ids, crop_counts)}
-
-        return {
-            'message': f'Segmentation completed for season {season}',
-            'outputs': {
-                'predicted_tif': predicted_tif_path,
-                'ground_truth_tif': ground_truth_tif_path,
-                'predicted_png': pred_png_path,
-                'ground_truth_png': gt_png_path
-            },
-            'metrics': {
-                'prediction_shape': prediction.shape,
-                'crop_distribution': crop_distribution
-            },
-            'status': 'success'
-        }
-
+        return None
+    
     except Exception as e:
         print(traceback.format_exc())
         return {
@@ -88,7 +80,7 @@ def run(json):
             'error': traceback.format_exc(),
             'status': 500
         }
-
+        
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
