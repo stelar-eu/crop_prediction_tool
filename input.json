@@ -1,0 +1,144 @@
+
+{
+    "input": {
+        "lai_files": [
+            "s3://vista-bucket/Pilot_B/UCB2/33UUP/TIMESERIES_EXTRACTION_GROUND_TRUTH/lai_field_timeseries.csv"
+        ],
+        "npk_values": [
+            "s3://abaco-bucket/MATCH/user_NPK_values.csv"
+        ],
+        "actual_LAI": [
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_00.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_01.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_02.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_03.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_04.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_05.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_06.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_07.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_08.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_09.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_10.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_11.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_12.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_13.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_14.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_15.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_16.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_17.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_18.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_19.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_20.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_21.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_22.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_23.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_24.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_25.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_26.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_27.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_28.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_29.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_30.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_31.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_32.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_33.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_34.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_35.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_36.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_37.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_38.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_39.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_40.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_41.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_42.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_43.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_44.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_45.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_46.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_47.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_48.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_49.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_50.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_51.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_52.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_53.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_54.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_55.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_56.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_57.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_58.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_59.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_60.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_61.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_62.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_63.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_64.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_65.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_66.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_67.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_68.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_69.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_70.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_71.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_72.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_73.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_74.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_75.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_76.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_77.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_78.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_79.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_80.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_81.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_82.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_83.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_84.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_85.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_86.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_87.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_88.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_89.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_90.tif",
+            "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_91.tif"
+          ],
+          "spatial_labels": [
+            "s3://vista-bucket/Pilot_B/UCB/30TYQ_labels/vista_labes_aligned.npy"]
+
+    },
+    "parameters":{
+        "months_chosen": ["Feb_Aug", "May_Aug", "Jun_Oct", "Jan_Aug"],
+        "upper_left_x" : 704855.0,
+        "upper_left_y": 4995145.0,
+        "pixel_size": 10.0,
+        "crs_code": "EPSG:32630",
+
+        "Feb_Aug_crop_group": [33, 36, 41, 34, 37, 40],
+        "Feb_Aug_subgroup1": [34, 37, 40],
+        "Feb_Aug_subgroup2": [33, 36, 41],
+
+        "May_Aug_crop_group": [2, 15, 20, 21, 23, 28],
+        "May_Aug_subgroup1": [2, 25, 20],
+        "May_Aug_subgroup2": [21, 23, 28],
+
+        "Jun_Oct_crop_group": [8, 30, 9, 18, 19, 7],
+        "Jun_Oct_subgroup1": [8, 9, 30],
+        "Jun_Oct_subgroup2": [7, 18, 19],
+
+        "Jan_Aug_crop_group": [4, 7, 9],
+        "Jan_Aug_subgroup1": [4, 7, 9],
+
+        "num_eval_patches" : 300
+
+    },
+    "minio": {
+        "endpoint_url": "https://minio.stelar.gr",
+        "id": "",
+        "key": "",
+        "skey": ""
+    },
+    "output": {
+        "predictions": "s3://vista-bucket/Pilot_B/UCB/outputs/random_cards.txt"
+    }
+}
+
+
