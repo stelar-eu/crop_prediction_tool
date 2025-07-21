@@ -102,7 +102,17 @@
             "s3://vista-bucket/Pilot_B/UCB/trial_lai/30TYQ_LAI_2022_measure_91.tif"
           ],
           "spatial_labels": [
-            "s3://vista-bucket/Pilot_B/UCB/30TYQ_labels/vista_labes_aligned.npy"]
+            "s3://vista-bucket/Pilot_B/UCB/30TYQ_labels/vista_labes_aligned.npy"],
+
+          "models_in_ensemble": [
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_21_23_28_epoch_f.h5",
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_2_15_20_epoch_f.h5", 
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_34_37_40_epoch_f.h5", 
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_33_36_41_epoch_f.h5",
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_4_7_9_epoch_f.h5",
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_7_18_19_epoch_f.h5",
+            "s3://vista-bucket/Pilot_B/UCB/models/3D_unet_g4_h4_crop_8_9_30_epoch_f.h5"
+            ]
 
     },
     "parameters":{
@@ -137,7 +147,7 @@
         "skey": ""
     },
     "output": {
-        "predictions": "s3://vista-bucket/Pilot_B/UCB/outputs/random_cards.txt"
+        "predictions": "s3://vista-bucket/Pilot_B/UCB/outputs/"
     }
 }
 
