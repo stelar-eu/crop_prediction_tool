@@ -33,6 +33,9 @@ python main.py input.json output.json
 
 download_LAI = False
 download_mask = False
+
+download_models = False
+
 start_evaluating = False
 
 pre_sampling_Feb_Aug = False
@@ -46,6 +49,8 @@ Jun_Oct_subgroup_aggregation = False
 Jan_Aug_subgroup_aggregation = False
 
 do_all_evaluations = False
+
+
 
 def create_random_txt(filename: str) -> None:
 
@@ -66,8 +71,8 @@ def run(json):
         inputs = json['input']
         outputs = json['output']
 
-        create_random_txt("./testpath/random.txt")
-        mc.put_object(s3_path= outputs['predictions'], file_path="./testpath/random.txt")
+        #create_random_txt("./testpath/random.txt")
+        #mc.put_object(s3_path= outputs['predictions'], file_path="./testpath/random.txt")
         #mc.put_object(s3_path= outputs['predictions'], file_path="./testpath/evaluation_report.txt")
         #mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/evaluation_report.txt")
 
@@ -91,10 +96,23 @@ def run(json):
             for ts in range (len(act_lai_files)):
                 mc.get_object(s3_path=act_lai_files[ts], local_path='./dataset/france2/processed_lai_npy2/'+act_lai_files[ts][40:-6]+str(ts).zfill(2)+'.tif')
 
+
+
         # Download Labels
         if download_mask:
             labels = inputs['spatial_labels']          # path to LAI folder in MinIO
             mc.get_object(s3_path=labels[0], local_path='./storage/full_mast1/vista_labes_aligned.npy')
+
+
+
+        # Download Trained models
+        trained_models = inputs['models_in_ensemble']          # path to LAI folder in MinIO
+        outputs = json['output']
+        if download_models:
+            for ts in range (len(trained_models)):
+                print("trained_models[ts]", trained_models[ts][37:])
+                mc.get_object(s3_path=trained_models[ts], local_path='./checkpoints_f1/'+trained_models[ts][37:]+'')
+
 
         # To save full tail
         if start_evaluating:
@@ -162,11 +180,28 @@ def run(json):
 
         write_eval_results()
 
-        mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/crop_type_confusion_matrix.png")
-        mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/evaluation_report.txt")
-        mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/exp2_acc_no_cloud_interpol.png")
-        mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/exp2_f1_no_cloud_interpol.png")
-        mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/exp2_iou_no_cloud_interpol.png")
+        mc.put_object(s3_path= outputs['predictions']+'crop_type_confusion_matrix.png', file_path="./evaluation_results/crop_type_confusion_matrix.png")
+        mc.put_object(s3_path= outputs['predictions']+'evaluation_report.txt', file_path="./evaluation_results/evaluation_report.txt")
+        mc.put_object(s3_path= outputs['predictions']+'exp2_acc_no_cloud_interpol.png', file_path="./evaluation_results/exp2_acc_no_cloud_interpol.png")
+        mc.put_object(s3_path= outputs['predictions']+'exp2_f1_no_cloud_interpol.png', file_path="./evaluation_results/exp2_f1_no_cloud_interpol.png")
+        mc.put_object(s3_path= outputs['predictions']+'exp2_iou_no_cloud_interpol.png', file_path="./evaluation_results/exp2_iou_no_cloud_interpol.png")
+        mc.put_object(s3_path= outputs['predictions']+'aggregated_predicted_Feb_Aug.tif', file_path="./aggregated_predicted_Feb_Aug.tif")
+        mc.put_object(s3_path= outputs['predictions']+'aggregated_predicted_May_Aug.tif', file_path="./aggregated_predicted_May_Aug.tif")
+        mc.put_object(s3_path= outputs['predictions']+'aggregated_predicted_Jun_Oct.tif', file_path="./aggregated_predicted_Jun_Oct.tif")
+        mc.put_object(s3_path= outputs['predictions']+'aggregated_predicted_Jan_Aug.tif', file_path="./aggregated_predicted_Jan_Aug.tif")
+
+        mc.put_object(s3_path= outputs['predictions']+'Feb_Aug_ground_truth_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/Feb_Aug_ground_truth_.png")
+        mc.put_object(s3_path= outputs['predictions']+'Feb_Aug_predicted_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/Feb_Aug_predicted_.png")
+
+        mc.put_object(s3_path= outputs['predictions']+'May_Aug_ground_truth_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/May_Aug_ground_truth_.png")
+        mc.put_object(s3_path= outputs['predictions']+'May_Aug_predicted_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/May_Aug_predicted_.png")
+
+        mc.put_object(s3_path= outputs['predictions']+'Jun_Oct_ground_truth_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/Jun_Oct_ground_truth_.png")
+        mc.put_object(s3_path= outputs['predictions']+'Jun_Oct_predicted_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/Jun_Oct_predicted_.png")
+
+        mc.put_object(s3_path= outputs['predictions']+'Jan_Aug_ground_truth_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/Jan_Aug_ground_truth_.png")
+        mc.put_object(s3_path= outputs['predictions']+'Jan_Aug_ground_truth_.png', file_path="./vista_patch_exp0/aggregated_plots_f1_gt/Jan_Aug_ground_truth_.png")
+
 
         return None
     
