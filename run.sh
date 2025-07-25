@@ -22,6 +22,11 @@ result=$(echo "$response" | jq '.result')
 echo "$result" > input.json
 echo "[STELAR INFO] Input fetched and written to input.json"
 
+
+# Activate the conda environment
+source /opt/conda/etc/profile.d/conda.sh
+conda activate stconf
+
 # Run tool
 python -u main.py input.json output.json
 output_json=$(<output.json)
