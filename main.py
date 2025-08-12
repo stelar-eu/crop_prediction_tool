@@ -31,24 +31,24 @@ python main.py input.json output.json
 
 '''
 
-download_LAI = False
-download_mask = False
+download_LAI = True
+download_mask = True
 
-download_models = False
+download_models = True
 
-start_evaluating = False
+start_evaluating = True
 
-pre_sampling_Feb_Aug = False
-pre_sampling_May_Aug = False
-pre_sampling_Jun_Oct = False
-pre_sampling_Jan_Aug = False
+pre_sampling_Feb_Aug = True
+pre_sampling_May_Aug = True
+pre_sampling_Jun_Oct = True
+pre_sampling_Jan_Aug = True
 
-Feb_Aug_subgroup_aggregation = False
-May_Aug_subgroup_aggregation = False
-Jun_Oct_subgroup_aggregation = False
-Jan_Aug_subgroup_aggregation = False
+Feb_Aug_subgroup_aggregation = True
+May_Aug_subgroup_aggregation = True
+Jun_Oct_subgroup_aggregation = True
+Jan_Aug_subgroup_aggregation = True
 
-do_all_evaluations = False
+do_all_evaluations = True
 
 
 
