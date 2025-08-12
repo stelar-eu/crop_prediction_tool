@@ -23,6 +23,14 @@ import argparse
 import gc
 import tifffile
 
+
+'''
+
+python vista_patch_exp0/vista_testing_comp_f1_docker.py --season Feb_Aug
+
+
+'''
+
 parser = argparse.ArgumentParser(description='Enter crop type numbers in order')
 
 parser.add_argument('--season', type=str, default=0, help='input season')
@@ -33,7 +41,8 @@ season = args.season
 device_name = tf.test.gpu_device_name()
 print('Found GPU at: {}'.format(device_name))
 
-prefix = '/app/'
+#prefix = '/app/'
+prefix = '.'
 # Parameters from RHD header
 ulx = 704855.0        # upper-left X
 uly = 4995145.0       # upper-left Y
@@ -46,7 +55,7 @@ filepaths.sort()
 
 # Functions
 
-def slice_and_stack_cubes(data, cube_size=64):
+'''def slice_and_stack_cubes(data, cube_size=64):
     z_dim, x_dim, y_dim = data.shape
     cubes = []
     for x in range(0, x_dim, cube_size):
@@ -55,9 +64,9 @@ def slice_and_stack_cubes(data, cube_size=64):
                 cube = data[:, x:x + cube_size, y:y + cube_size]
                 cubes.append(cube)
     cubes_array = np.stack(cubes)
-    return cubes_array
+    return cubes_array'''
 
-def reassemble_cubes(cubes, original_shape, cube_size=64):
+'''def reassemble_cubes(cubes, original_shape, cube_size=64):
     z_dim, x_dim, y_dim = original_shape
     reassembled = np.zeros((z_dim, x_dim, y_dim))
     index = 0
@@ -66,9 +75,9 @@ def reassemble_cubes(cubes, original_shape, cube_size=64):
             if x + cube_size <= x_dim and y + cube_size <= y_dim:
                 reassembled[:, x:x + cube_size, y:y + cube_size] = cubes[index]
                 index += 1
-    return reassembled
+    return reassembled'''
 
-def reassemble_2d_slices(slices, original_shape, slice_size=64):
+'''def reassemble_2d_slices(slices, original_shape, slice_size=64):
     x_dim, y_dim = original_shape
     reassembled = np.zeros((x_dim, y_dim))
     index = 0
@@ -77,9 +86,9 @@ def reassemble_2d_slices(slices, original_shape, slice_size=64):
             if x + slice_size <= x_dim and y + slice_size <= y_dim:
                 reassembled[x:x + slice_size, y:y + slice_size] = slices[index]
                 index += 1
-    return reassembled
+    return reassembled'''
 
-def slice_2d_labels(labels, slice_size=64):
+'''def slice_2d_labels(labels, slice_size=64):
     x_dim, y_dim = labels.shape
     slices = []
     for x in range(0, x_dim, slice_size):
@@ -88,7 +97,7 @@ def slice_2d_labels(labels, slice_size=64):
                 slice = labels[x:x + slice_size, y:y + slice_size]
                 slices.append(slice)
     slices_array = np.stack(slices)
-    return slices_array
+    return slices_array'''
 
 def get_labels_in_color(groud_truth_image):
     color_map = {10: [0, 0, 0], 0: [0, 0, 0], 11: [0, 255, 0], 12: [0, 0, 255], 13: [255, 255, 0], 14: [255, 165, 0], 15: [255, 0, 255], 16: [0, 255, 255], 17: [128, 0, 128], 18: [128, 128, 0], 19: [0, 128, 0], 20: [128, 0, 0], 21: [0, 0, 128], 22: [128, 128, 128], 23: [0, 128, 128], 24: [255, 0, 0], 25: [255, 255, 255], 26: [192, 192, 192], 27: [139, 0, 0], 28: [0, 100, 0], 29: [0, 0, 139], 30: [255, 215, 0], 31: [255, 140, 0], 32: [139, 0, 139], 33: [0, 206, 209], 34: [75, 0, 130], 35: [85, 107, 47], 36: [34, 139, 34], 37: [165, 42, 42], 38: [70, 130, 180], 39: [169, 169, 169], 40: [32, 178, 170], 41: [47, 79, 79], 42: [245, 245, 245], 43: [105, 105, 105], 44: [205, 92, 92], 45: [50, 205, 50], 46: [65, 105, 225], 47: [255, 223, 0], 48: [255, 99, 71], 49: [186, 85, 211], 50: [0, 191, 255], 51: [192, 192, 192]}
@@ -164,7 +173,9 @@ for filepath in considered_filepaths:
 
 all_processed_LAI = np.stack(numpy_array_all, axis=0)
 del numpy_array_all
+
 gc.collect()
+
 labels = tf.convert_to_tensor(labels)  # defaults to float32 already
 labels = np.pad(labels, ((0, pad_height), (0, pad_width)), mode='constant', constant_values=0)
 labels = tf.identity(labels)  # placeholder; TF automatically uses GPU if available
@@ -207,7 +218,7 @@ gc.collect()
 
 # Inference
 
-check = 0
+#check = 0
 all_test_mode = []
 all_ground_truth_flattened = []
 for test_img_number in range(len(X_test)):
