@@ -209,7 +209,7 @@ def evaluate_months(season, ulx, uly, pixel_size, crs_code):
         for chosen_crop_types_list in chosen_crop_types_list_list_models:
             gc.collect()
             my_model_1 = sm.Unet(BACKBONE, input_shape=(64, 64, 64, 3), classes=4, encoder_weights=None, activation='softmax')
-            my_model_1.load_weights(prefix+'/checkpoints_f2/3D_unet_g4_h4_crop_'+str(chosen_crop_types_list[0]-10)+'_'+str(chosen_crop_types_list[1]-10)+'_'+str(chosen_crop_types_list[2]-10)+'_epoch_f.h5', by_name=True, skip_mismatch=True)
+            my_model_1.load_weights(prefix+'/checkpoints_f1/3D_unet_g4_h4_crop_'+str(chosen_crop_types_list[0]-10)+'_'+str(chosen_crop_types_list[1]-10)+'_'+str(chosen_crop_types_list[2]-10)+'_epoch_f.h5', by_name=True, skip_mismatch=True)
             test_pred1 = my_model_1.predict(test_img_input1)
             del my_model_1
             gc.collect()
