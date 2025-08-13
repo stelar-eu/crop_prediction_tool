@@ -11,20 +11,11 @@ import numpy as np
 import string
 import random
 
-from vista_patch_exp0.spatial_recon import evaluate_months
-
-from vista_patch_exp0.eval_pre_sampler import LAI_period_sampler
-
-from vista_patch_exp0.subgroup_aggregator import subgroup_aggregator
-
-from vista_patch_exp0.final_evaluator import patch_evaluator 
-
-from vista_patch_exp0.all_metrics_and_visuals import write_eval_results
 
 '''
 conda deactivate
 conda deactivate
-cd /home/luser/crop_prediction_tool
+cd /home/luser/tool_testing/crop_prediction_tool
 conda activate /home/luser/miniforge3/envs/stcon4
 
 python main.py input.json output.json
@@ -59,6 +50,23 @@ def create_random_txt(filename: str) -> None:
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(random_text)
 
+import time
+
+def wait_until_file_ready(filepath, timeout=30):
+    start_time = time.time()
+    while True:
+        if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+            try:
+                with open(filepath, 'rb') as f:
+                    f.read(1)  # Try to read a byte
+                break
+            except Exception:
+                pass
+        if time.time() - start_time > timeout:
+            raise TimeoutError(f"File {filepath} not ready after {timeout} seconds.")
+        time.sleep(0.2)
+
+
 def run(json):
     try:
         ######################## MINIO INIT ########################
@@ -70,13 +78,6 @@ def run(json):
         mc = MinioClient(minio_endpoint, minio_id, minio_key, secure=True, session_token=minio_skey)
         inputs = json['input']
         outputs = json['output']
-
-        #create_random_txt("./testpath/random.txt")
-        #mc.put_object(s3_path= outputs['predictions'], file_path="./testpath/random.txt")
-        #mc.put_object(s3_path= outputs['predictions'], file_path="./testpath/evaluation_report.txt")
-        #mc.put_object(s3_path= outputs['predictions'], file_path="./evaluation_results/evaluation_report.txt")
-
-
 
         params = json['parameters']
         chosen_months = params['months_chosen']
@@ -95,15 +96,17 @@ def run(json):
         if download_LAI:
             for ts in range (len(act_lai_files)):
                 mc.get_object(s3_path=act_lai_files[ts], local_path='./dataset/france2/processed_lai_npy2/'+act_lai_files[ts][40:-6]+str(ts).zfill(2)+'.tif')
-
-
+            local_path='./dataset/france2/processed_lai_npy2/'+act_lai_files[ts][40:-6]+str(ts).zfill(2)+'.tif'
+            wait_until_file_ready(local_path)
+            print("done saving LAI")
 
         # Download Labels
         if download_mask:
             labels = inputs['spatial_labels']          # path to LAI folder in MinIO
             mc.get_object(s3_path=labels[0], local_path='./storage/full_mast1/vista_labes_aligned.npy')
-
-
+            local_path='./storage/full_mast1/vista_labes_aligned.npy'
+            wait_until_file_ready(local_path)
+            print("done saving labels")
 
         # Download Trained models
         trained_models = inputs['models_in_ensemble']          # path to LAI folder in MinIO
@@ -112,6 +115,16 @@ def run(json):
             for ts in range (len(trained_models)):
                 print("trained_models[ts]", trained_models[ts][37:])
                 mc.get_object(s3_path=trained_models[ts], local_path='./checkpoints_f1/'+trained_models[ts][37:]+'')
+            local_path='./checkpoints_f1/'+trained_models[ts][37:]+''
+            wait_until_file_ready(local_path)
+            print("done saving models")
+
+
+        from vista_patch_exp0.spatial_recon import evaluate_months
+        from vista_patch_exp0.eval_pre_sampler import LAI_period_sampler
+        from vista_patch_exp0.subgroup_aggregator import subgroup_aggregator
+        from vista_patch_exp0.final_evaluator import patch_evaluator 
+        from vista_patch_exp0.all_metrics_and_visuals import write_eval_results
 
 
         # To save full tail
