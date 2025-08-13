@@ -119,7 +119,7 @@ def run(json):
             wait_until_file_ready(local_path)
             print("done saving models")
 
-
+        # these imports should be only here and not at the beginning so that the files saved are considered while identifying the paths
         from vista_patch_exp0.spatial_recon import evaluate_months
         from vista_patch_exp0.eval_pre_sampler import LAI_period_sampler
         from vista_patch_exp0.subgroup_aggregator import subgroup_aggregator
