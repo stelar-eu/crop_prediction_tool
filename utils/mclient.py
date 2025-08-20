@@ -72,6 +72,9 @@ class MinioClient:
         response = self.client.get_object(bucket_name, object_name)
         try:
             if local_path:
+                dir_name = os.path.dirname(local_path)
+                if dir_name and not os.path.exists(dir_name):
+                    os.makedirs(dir_name, exist_ok=True)
                 with open(local_path, 'wb') as file_data:
                     for d in response.stream(32 * 1024):
                         file_data.write(d)
