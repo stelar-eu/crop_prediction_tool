@@ -73,9 +73,9 @@ def run(json):
         minio_id = json['minio']['id']
         minio_key = json['minio']['key']
         minio_skey = json['minio']['skey']
-        minio_endpoint = json['minio']['endpoint_url']
+        minio_endpoint = json['minio']['internal_url']
 
-        mc = MinioClient(minio_endpoint, minio_id, minio_key, secure=True, session_token=minio_skey)
+        mc = MinioClient(minio_endpoint, minio_id, minio_key, secure=False, session_token=minio_skey)
         inputs = json['input']
         outputs = json['output']
 

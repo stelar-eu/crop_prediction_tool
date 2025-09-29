@@ -2,7 +2,7 @@
 DOCKER=docker
 IMGTAG=img.stelar.gr/stelar/crop-classification:latest
 IMGPATH=.
-DOCKERFILE=$(IMGPATH)/Dockerfile
+DOCKERFILE=$(IMGPATH)/Dockerfile.ovwrt
 
 .PHONY: all build push
 

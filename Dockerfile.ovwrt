@@ -1,0 +1,6 @@
+FROM img.stelar.gr/stelar/crop-classification:latest
+
+WORKDIR /app
+
+COPY . /app/
+
