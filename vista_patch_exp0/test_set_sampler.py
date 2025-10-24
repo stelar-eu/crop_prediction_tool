@@ -245,6 +245,6 @@ print("all_lai.shape", all_lai.shape)
 print("all_labels.shape", all_labels.shape)
 
 
-tifffile.imsave('./storage/per_crop_data_labels_test/'+vista_crop_dict[chosen_crop_types]+'/train'+vista_crop_dict[chosen_crop_types]+'n.tif', all_lai)
-tifffile.imsave('./storage/per_crop_data_labels_test/'+vista_crop_dict[chosen_crop_types]+'/lab'+vista_crop_dict[chosen_crop_types]+'n.tif', all_labels)
+tifffile.imwrite('./storage/per_crop_data_labels_test/'+vista_crop_dict[chosen_crop_types]+'/train'+vista_crop_dict[chosen_crop_types]+'n.tif', all_lai)
+tifffile.imwrite('./storage/per_crop_data_labels_test/'+vista_crop_dict[chosen_crop_types]+'/lab'+vista_crop_dict[chosen_crop_types]+'n.tif', all_labels)
 

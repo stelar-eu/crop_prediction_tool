@@ -157,5 +157,5 @@ y_test_all = y_test_all[:1000]
 print("X_test.shape", X_test.shape)
 print("y_test_all.shape", y_test_all.shape)
 
-tifffile.imsave('./storage/test_sets_of_subsets_all/X_test'+'_contains'+vista_crop_dict[cr_1]+'_'+vista_crop_dict[cr_2]+'_'+vista_crop_dict[cr_3]+'_.tif', X_test)
-tifffile.imsave('./storage/test_sets_of_subsets_all/y_test_all'+'_contains'+vista_crop_dict[cr_1]+'_'+vista_crop_dict[cr_2]+'_'+vista_crop_dict[cr_3]+'_.tif', y_test_all)
+tifffile.imwrite('./storage/test_sets_of_subsets_all/X_test'+'_contains'+vista_crop_dict[cr_1]+'_'+vista_crop_dict[cr_2]+'_'+vista_crop_dict[cr_3]+'_.tif', X_test)
+tifffile.imwrite('./storage/test_sets_of_subsets_all/y_test_all'+'_contains'+vista_crop_dict[cr_1]+'_'+vista_crop_dict[cr_2]+'_'+vista_crop_dict[cr_3]+'_.tif', y_test_all)

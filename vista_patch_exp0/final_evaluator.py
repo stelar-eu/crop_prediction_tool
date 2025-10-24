@@ -84,7 +84,7 @@ def patch_evaluator(season, num_subgroup_samples):
             ensambled_result_image_gen = np.zeros((64, 64, 64))
 
             test_img = X_test[test_img_number-1]
-            tifffile.imsave('./ensamble_results/iou_f1_class_weights/inputs/input_subset_season'+season+'_'+str(chosen_subset_for_test_set)+'_sample_'+str(test_img_number)+'_.tif', test_img)
+            tifffile.imwrite('./ensamble_results/iou_f1_class_weights/inputs/input_subset_season'+season+'_'+str(chosen_subset_for_test_set)+'_sample_'+str(test_img_number)+'_.tif', test_img)
 
             
             test_img_input1=np.expand_dims(test_img, 0)
@@ -128,7 +128,7 @@ def patch_evaluator(season, num_subgroup_samples):
             test_mode = test_mode.astype(np.uint8)
             ground_truth_flattened = ground_truth_flattened.astype(np.uint8)
 
-            tifffile.imsave('./ensamble_results/iou_f1_class_weights/no_cloud_interpol/ground_truth_subset_season'+season+'_'+str(chosen_subset_for_test_set)+'_sample_'+str(test_img_number)+'_.tif', test_mode)
-            tifffile.imsave('./ensamble_results/iou_f1_class_weights/no_cloud_interpol/prediction_subset_season'+season+'_'+str(chosen_subset_for_test_set)+'_sample_'+str(test_img_number)+'_.tif', ground_truth_flattened)
+            tifffile.imwrite('./ensamble_results/iou_f1_class_weights/no_cloud_interpol/ground_truth_subset_season'+season+'_'+str(chosen_subset_for_test_set)+'_sample_'+str(test_img_number)+'_.tif', test_mode)
+            tifffile.imwrite('./ensamble_results/iou_f1_class_weights/no_cloud_interpol/prediction_subset_season'+season+'_'+str(chosen_subset_for_test_set)+'_sample_'+str(test_img_number)+'_.tif', ground_truth_flattened)
 
 
