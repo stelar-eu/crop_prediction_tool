@@ -13,6 +13,12 @@ import random
 
 
 '''
+
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+
+docker logs 782d5bb1068e -f
+
 conda deactivate
 conda deactivate
 cd /home/luser/tool_testing/crop_prediction_tool
@@ -70,12 +76,14 @@ def wait_until_file_ready(filepath, timeout=30):
 def run(json):
     try:
         ######################## MINIO INIT ########################
-        minio_id = json['minio']['id']
-        minio_key = json['minio']['key']
-        minio_skey = json['minio']['skey']
+        #minio_id = json['minio']['id']
+        minio_id = "mcyOg4iR5HftaA5KECyc"
+        #minio_key = json['minio']['key']
+        minio_key = "hmML90voTbcAqDB8zztqYtQdftnqXgFS9dztQCEO"
+        #minio_skey = json['minio']['skey']
         minio_endpoint = json['minio']['internal_url']
 
-        mc = MinioClient(minio_endpoint, minio_id, minio_key, secure=False, session_token=minio_skey)
+        mc = MinioClient(minio_endpoint, minio_id, minio_key, secure=False)
         inputs = json['input']
         outputs = json['output']
 
