@@ -161,8 +161,8 @@ def LAI_period_sampler(season, chosen_crop_types):
     '''chosen_crop_types = args.chosen_crop_types
     season = args.season'''
 
-    chosen_crop_types = 4
-    season = "Jan_Aug"
+    #chosen_crop_types = 4
+    #season = "Jan_Aug"
 
 
     if season=="Feb_Aug":
