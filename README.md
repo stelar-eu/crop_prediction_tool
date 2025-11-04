@@ -14,27 +14,43 @@ You can launch the whole pipeline from the Jupyter notebook `crop_classification
 
 main.py orchestrates MinIO I/O, model ensemble loading, monthly evaluations, subgroup aggregation, patch-level evaluation, and report creation using helpers in vista_patch_exp0:
 
-	•	evaluate_months(...)
-	•	LAI_period_sampler(...)
-	•	subgroup_aggregator(...)
-	•	patch_evaluator(...)
-	•	write_eval_results()
+	1. evaluate_months(...)
+	2. LAI_period_sampler(...)
+	3. subgroup_aggregator(...)
+	4. patch_evaluator(...)
+	5. write_eval_results()
 
 It expects:
 
-	•	LAI raster .tif time series
-	•	spatial labels .npy
-	•	a list of trained .h5 models
-	•	region/window parameters and crop groups for multiple seasonal windows
+	1. LAI raster .tif time series
+	2. spatial labels .npy
+	3. a list of trained .h5 models
+	5. region/window parameters and crop groups for multiple seasonal windows
 
 
-## Dockerization step
+## Installations required(package requrements)
 
-
-### Create a Temporary Directory for Docker Installation
 
 <pre>
-mkdir /your/address/docker-tmp
+    conda config --set channel_priority strict && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r && \
+    conda create -y -n $CONDA_ENV python=3.11 && \
+    conda activate $CONDA_ENV && \
+    conda install -y -c conda-forge cudatoolkit=11.8 && \
+    pip install nvidia-cudnn-cu11==8.6.0.163 && \
+    conda install -y -c conda-forge tensorflow=2.13 && \
+    pip install classification-models-3D==1.0.10 && \
+    pip install efficientnet-3D==1.0.2 && \
+    pip install segmentation-models-3D==1.0.7 && \
+    pip install minio && \
+    conda install -y -c conda-forge scikit-learn==1.5.0 && \
+    conda install -y -c conda-forge matplotlib && \
+    pip install patchify==0.2.3 && \
+    conda install -y -c conda-forge scikit-image==0.24.0 && \
+    conda install -y -c conda-forge rasterio sqlite gdal pyproj fiona geopandas && \
+    conda install -y -c conda-forge opencv && \
+    conda clean --all --yes"
 </pre>
 
 ### Build the Docker Container
