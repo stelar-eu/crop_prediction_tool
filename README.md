@@ -163,6 +163,12 @@ Paths to data and models stored in **MinIO**:
 - **`spatial_labels`** — `.npy` label array  
 - **`models_in_ensemble`** — trained model `.h5` files  
 
+
+#### LAI time series
+
+<img src="./showcase/LAIs.png" alt="lai_sequence" width="800">
+
+
 #### **`parameters`**
 Spatial metadata and crop grouping:
 - **Geographic extent** — `upper_left_x`, `upper_left_y`, `pixel_size`, `crs_code`  
