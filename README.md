@@ -1,5 +1,14 @@
 # crop_prediction_tool
 
+
+This repository runs an end-to-end crop-type classification workflow that:
+	1.	downloads LAI rasters, labels, and trained models from MinIO
+	2.	runs spatio-temporal inference and evaluation
+	3.	uploads metrics, plots, and GeoTIFFs back to MinIO
+
+You can launch the whole pipeline from the Jupyter notebook crop_classification_remote.ipynb (recommended). The notebook triggers main.py under the hood.
+
+
 ## Dockerization step
 
 
