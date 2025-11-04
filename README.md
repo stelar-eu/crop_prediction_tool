@@ -13,7 +13,7 @@ You can launch the whole pipeline from the Jupyter notebook `crop_classification
 
 ### Bias-aware crop classification pipeline
 
-<img src="./showcase/pipeline.png" alt="Bias_aware_pipeline" width="600">
+<img src="./showcase/pipeline.png" alt="Bias_aware_pipeline" width="800">
 
 ## Overview
 
