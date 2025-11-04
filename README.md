@@ -10,6 +10,24 @@ This repository runs an end-to-end crop-type classification workflow that:
 You can launch the whole pipeline from the Jupyter notebook `crop_classification_remote.ipynb` (recommended). The notebook triggers main.py under the hood.
 
 
+## Overview
+
+main.py orchestrates MinIO I/O, model ensemble loading, monthly evaluations, subgroup aggregation, patch-level evaluation, and report creation using helpers in vista_patch_exp0:
+
+	•	evaluate_months(...)
+	•	LAI_period_sampler(...)
+	•	subgroup_aggregator(...)
+	•	patch_evaluator(...)
+	•	write_eval_results()
+
+It expects:
+
+	•	LAI raster .tif time series
+	•	spatial labels .npy
+	•	a list of trained .h5 models
+	•	region/window parameters and crop groups for multiple seasonal windows
+
+
 ## Dockerization step
 
 
