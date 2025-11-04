@@ -171,7 +171,7 @@ Paths to data and models stored in **MinIO**:
 
 #### Labels extracted from Eurocrops field boundaries and HCAT crop IDs over the whole of France
 
-<img src="./showcase/franceLabels.png" alt="lai_sequence" width="800">
+<img src="./showcase/franceLabels.png" alt="france" width="800">
 
 #### Labels extracted from Eurocrops field boundaries and HCAT crop IDs over chosen vista patch
 
@@ -225,3 +225,10 @@ Additional local copies of these files are stored in:
 - `./evaluation_results/`
 - `./vista_patch_exp0/aggregated_plots_f1_gt/`
 - Project root for `aggregated_predicted_*.tif`
+
+
+### Output Visualizations
+
+#### Example full tile output ground truth comparision for crops found in between months June-October
+
+<img src="./showcase/june_oct_full_tile.png" alt="full_tile" width="800">
