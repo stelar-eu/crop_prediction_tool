@@ -74,6 +74,22 @@ It expects:
 4. **Upload to MinIO (final outputs)**
    - Confusion matrix, metrics, plots, and aggregate GeoTIFFs → your specified `output.predictions` S3 path
 
+
+
+### Run options
+
+#### A) Recommended: via Jupyter notebook
+
+Open and run **`crop_classification_remote.ipynb`**.  
+It sets up the environment and automatically executes `main.py` with your chosen `input.json` and `output.json` files.
+
+#### B) CLI: run `main.py` directly
+
+```
+python main.py input.json output.json
+```
+
+
 ### Build the Docker Container
 
 CLone the repository :
