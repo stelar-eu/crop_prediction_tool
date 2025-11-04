@@ -10,6 +10,11 @@ This repository runs an end-to-end crop-type classification workflow that:
 You can launch the whole pipeline from the Jupyter notebook `crop_classification_remote.ipynb` (recommended). The notebook triggers main.py under the hood.
 
 
+
+### Bias-aware crop classification pipeline
+
+<img src="./showcase/pipeline.png" alt="Bias_aware_pipeline" width="600">
+
 ## Overview
 
 main.py orchestrates MinIO I/O, model ensemble loading, monthly evaluations, subgroup aggregation, patch-level evaluation, and report creation using helpers in vista_patch_exp0:
