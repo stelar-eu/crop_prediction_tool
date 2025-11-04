@@ -148,3 +148,26 @@ Below is an example of a valid input configuration file (`input.json`):
     "predictions": "s3://vista-bucket/Pilot_B/UCB/outputs/"
   }
 }
+```
+
+### Key sections
+
+#### **`input`**
+Paths to data and models stored in **MinIO**:
+- **`actual_LAI`** — list of LAI raster `.tif` files  
+- **`spatial_labels`** — `.npy` label array  
+- **`models_in_ensemble`** — trained model `.h5` files  
+
+#### **`parameters`**
+Spatial metadata and crop grouping:
+- **Geographic extent** — `upper_left_x`, `upper_left_y`, `pixel_size`, `crs_code`  
+- **Seasonal windows** — `months_chosen`  
+- **Crop and subgroup definitions** — defined for each seasonal window  
+- **`num_eval_patches`** — number of random patches used for evaluation  
+
+#### **`minio`**
+Connection configuration for the **MinIO** endpoint:  
+Replace empty strings with your actual credentials (`id`, `key`, `skey`).
+
+#### **`output`**
+Specifies the **S3 destination** where all generated outputs will be uploaded.
