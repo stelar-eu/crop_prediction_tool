@@ -232,3 +232,12 @@ Additional local copies of these files are stored in:
 #### Example full tile output ground truth comparision for crops found in between months June-October
 
 <img src="./showcase/june_oct_full_tile.png" alt="full_tile" width="800">
+
+
+#### Crop specific confusion matrix
+
+<img src="./showcase/crop_type_confusion_matrix.png" alt="confusion" width="800">
+
+#### Crop specific F1 scores
+
+<img src="./showcase/exp2_f1_no_cloud_interpol.png" alt="f1" width="800">
