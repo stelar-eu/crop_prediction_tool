@@ -180,6 +180,11 @@ Paths to data and models stored in **MinIO**:
   <img src="./showcase/croo_legend.png" alt="Legend" width="400"/>
 </div>
 
+
+#### Distribution of crop types over the chosen landscape 
+
+<img src="./showcase/crop_distribution.png" alt="crop_distri" width="800">
+
 #### **`parameters`**
 Spatial metadata and crop grouping:
 - **Geographic extent** — `upper_left_x`, `upper_left_y`, `pixel_size`, `crs_code`  
