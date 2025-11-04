@@ -169,6 +169,11 @@ Paths to data and models stored in **MinIO**:
 <img src="./showcase/LAIs.png" alt="lai_sequence" width="800">
 
 
+#### Labels extracted from Eurocrops field boundaries and HCAT crop IDs over the whole of France
+
+<img src="./showcase/franceLabels.png" alt="lai_sequence" width="800">
+
+
 #### **`parameters`**
 Spatial metadata and crop grouping:
 - **Geographic extent** — `upper_left_x`, `upper_left_y`, `pixel_size`, `crs_code`  
