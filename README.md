@@ -28,7 +28,7 @@ It expects:
 	5. region/window parameters and crop groups for multiple seasonal windows
 
 
-## Installations required(package requrements)
+## Installations required(package requirements/dependencies)
 
 
 <pre>
@@ -52,6 +52,27 @@ It expects:
     conda install -y -c conda-forge opencv && \
     conda clean --all --yes"
 </pre>
+
+
+### How the data flows
+
+How the data flows
+	1.	Download from MinIO
+	•	LAI rasters → ./dataset/france2/processed_lai_npy2/*.tif
+	•	Labels → ./storage/full_mast1/vista_labes_aligned.npy
+	•	Models → ./checkpoints_f1/*.h5
+	2.	Run evaluations & aggregations
+	•	Per-season window evaluation (Feb_Aug, May_Aug, Jun_Oct, Jan_Aug)
+	•	Crop-group sampling and subgroup aggregation
+	•	Patch-based evaluator over a chosen number of random patches
+	3.	Write local results
+	•	./evaluation_results/*
+	•	./aggregated_predicted_*.tif
+	•	./vista_patch_exp0/aggregated_plots_f1_gt/*
+	4.	Upload to MinIO (final outputs)
+	•	Confusion matrix, metrics, plots, and aggregate GeoTIFFs → your specified output.predictions S3 path
+
+
 
 ### Build the Docker Container
 
