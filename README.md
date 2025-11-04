@@ -171,3 +171,30 @@ Replace empty strings with your actual credentials (`id`, `key`, `skey`).
 
 #### **`output`**
 Specifies the **S3 destination** where all generated outputs will be uploaded.
+
+
+### Outputs
+
+After a successful run, these files are uploaded to **`output.predictions`**:
+
+- `crop_type_confusion_matrix.png`
+- `evaluation_report.txt`
+- `exp2_acc_no_cloud_interpol.png`
+- `exp2_f1_no_cloud_interpol.png`
+- `exp2_iou_no_cloud_interpol.png`
+- `aggregated_predicted_Feb_Aug.tif`
+- `aggregated_predicted_May_Aug.tif`
+- `aggregated_predicted_Jun_Oct.tif`
+- `aggregated_predicted_Jan_Aug.tif`
+- `Feb_Aug_ground_truth_.png`, `Feb_Aug_predicted_.png`
+- `May_Aug_ground_truth_.png`, `May_Aug_predicted_.png`
+- `Jun_Oct_ground_truth_.png`, `Jun_Oct_predicted_.png`
+- `Jan_Aug_ground_truth_.png` *(listed twice in code; only one will be uploaded)*
+
+#### Local copies
+
+Additional local copies of these files are stored in:
+
+- `./evaluation_results/`
+- `./vista_patch_exp0/aggregated_plots_f1_gt/`
+- Project root for `aggregated_predicted_*.tif`
