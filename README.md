@@ -173,6 +173,12 @@ Paths to data and models stored in **MinIO**:
 
 <img src="./showcase/franceLabels.png" alt="lai_sequence" width="800">
 
+#### Labels extracted from Eurocrops field boundaries and HCAT crop IDs over chosen vista patch
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="./showcase/labels.png" alt="Labels" width="400"/>
+  <img src="./showcase/croo_legend.png" alt="Legend" width="400"/>
+</div>
 
 #### **`parameters`**
 Spatial metadata and crop grouping:
